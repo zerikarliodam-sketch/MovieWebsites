@@ -15,115 +15,79 @@
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
-<!-- HLS PLAYER -->
+<!-- HLS -->
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
 <style>
 .site-footer {
   background: #1c1c1c;
-  padding: 30px 15px 20px;
+  padding: 30px 15px;
   color: #fff;
 }
 
-/* TITLE */
 .site-footer h2 {
   font-size: 22px;
   margin-bottom: 15px;
 }
 
-/* ================= EFIR ================= */
-.live-player {
-  position: relative;
+/* ===== EFIR GRID ===== */
+.live-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+/* ===== CARD ===== */
+.live-card {
   background: #000;
   border-radius: 12px;
   overflow: hidden;
-  margin-bottom: 20px;
+  position: relative;
 }
 
-.live-player video {
-  width: 100%;
-  height: 200px;
-  background: #000;
-}
-
+/* BADGES */
 .live-badge {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 8px;
+  left: 8px;
   background: #00c853;
   color: #000;
   font-size: 11px;
   font-weight: 600;
   padding: 4px 10px;
   border-radius: 20px;
+  z-index: 5;
 }
 
-/* ================= CHANNELS ================= */
-.channels-scroll {
-  display: grid;
-  grid-auto-flow: column;
-  grid-template-rows: repeat(2, 1fr);
-  gap: 12px;
-  overflow-x: auto;
-  padding-bottom: 10px;
-  scroll-snap-type: x mandatory;
-}
-
-.channels-scroll::-webkit-scrollbar {
-  height: 4px;
-}
-.channels-scroll::-webkit-scrollbar-thumb {
-  background: #555;
-  border-radius: 10px;
-}
-
-/* CHANNEL CARD */
-.channel-card {
-  width: 160px;
-  background: #2a2a2a;
-  border-radius: 10px;
-  padding: 10px;
-  position: relative;
-  scroll-snap-align: start;
-}
-
-.channel-card img {
-  width: 100%;
-  height: 80px;
-  object-fit: contain;
-  background: #fff;
-  border-radius: 6px;
-}
-
-.channel-card p {
-  margin-top: 8px;
-  font-size: 13px;
-  text-align: center;
-  color: #ddd;
-}
-
-/* BADGES */
-.badge {
+.hd-badge {
   position: absolute;
-  top: 6px;
-  right: 6px;
+  top: 8px;
+  right: 8px;
+  background: #2979ff;
   font-size: 10px;
   padding: 3px 6px;
   border-radius: 4px;
-  font-weight: 600;
+  z-index: 5;
 }
 
-.badge.hd {
-  background: #2979ff;
-  color: #fff;
+/* LOGO */
+.live-logo {
+  background: #fff;
+  padding: 8px;
 }
 
-.footer-copy {
-  display: block;
-  text-align: center;
-  margin-top: 20px;
-  font-size: 12px;
-  color: #777;
+.live-logo img {
+  width: 100%;
+  height: 60px;
+  object-fit: contain;
+}
+
+/* VIDEO */
+.live-card video {
+  width: 100%;
+  height: 160px;
+  background: #000;
 }
 </style>
 
@@ -131,39 +95,54 @@
 
   <h2>ONLAYN EFIR</h2>
 
-  <!-- ===== LIVE EFIR PLAYER ===== -->
-  <div class="live-player">
-    <span class="live-badge">LIVE</span>
-    <video id="liveVideo" controls autoplay muted></video>
-  </div>
+  <div class="live-grid">
 
-  <h2>ONLAYN TV</h2>
+    <!-- EFIR 1 -->
+    <div class="live-card">
+      <span class="live-badge">LIVE</span>
+      <span class="hd-badge">HD</span>
 
-  <!-- ===== CHANNEL LIST ===== -->
-  <div class="channels-scroll">
+      <div class="live-logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/O%27zbekiston_24_logo.png/512px-O%27zbekiston_24_logo.png">
+      </div>
 
-    <div class="channel-card">
-      <span class="badge hd">HD</span>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/O%27zbekiston_24_logo.png/512px-O%27zbekiston_24_logo.png">
-      <p>O'zbekiston 24</p>
+      <video id="video1" controls muted></video>
     </div>
 
-    <div class="channel-card">
-      <span class="badge hd">HD</span>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Uzreport_TV_logo.png">
-      <p>UzReport TV</p>
+    <!-- EFIR 2 -->
+    <div class="live-card">
+      <span class="live-badge">LIVE</span>
+      <span class="hd-badge">HD</span>
+
+      <div class="live-logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Uzreport_TV_logo.png">
+      </div>
+
+      <video id="video2" controls muted></video>
     </div>
 
-    <div class="channel-card">
-      <span class="badge hd">HD</span>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Zo%27r_TV_logo.png">
-      <p>ZO'R TV</p>
+    <!-- EFIR 3 -->
+    <div class="live-card">
+      <span class="live-badge">LIVE</span>
+      <span class="hd-badge">HD</span>
+
+      <div class="live-logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Zo%27r_TV_logo.png">
+      </div>
+
+      <video id="video3" controls muted></video>
     </div>
 
-    <div class="channel-card">
-      <span class="badge hd">HD</span>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/2/25/Channel_One_Russia_logo.png">
-      <p>Первый канал</p>
+    <!-- EFIR 4 -->
+    <div class="live-card">
+      <span class="live-badge">LIVE</span>
+      <span class="hd-badge">HD</span>
+
+      <div class="live-logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/25/Channel_One_Russia_logo.png">
+      </div>
+
+      <video id="video4" controls muted></video>
     </div>
 
   </div>
@@ -172,14 +151,22 @@
 </footer>
 
 <script>
-const video = document.getElementById('liveVideo');
-const streamUrl = 'https://stream8.cinerama.uz/1016/tracks-v1a1/mono.m3u8';
+const streams = [
+  { id: "video1", url: "https://stream8.cinerama.uz/1016/tracks-v1a1/mono.m3u8" },
+  { id: "video2", url: "https://stream8.cinerama.uz/1016/tracks-v1a1/mono.m3u8" },
+  { id: "video3", url: "https://stream8.cinerama.uz/1016/tracks-v1a1/mono.m3u8" },
+  { id: "video4", url: "https://stream8.cinerama.uz/1016/tracks-v1a1/mono.m3u8" }
+];
 
-if (Hls.isSupported()) {
-  const hls = new Hls();
-  hls.loadSource(streamUrl);
-  hls.attachMedia(video);
-} else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-  video.src = streamUrl;
-}
+streams.forEach(stream => {
+  const video = document.getElementById(stream.id);
+
+  if (Hls.isSupported()) {
+    const hls = new Hls();
+    hls.loadSource(stream.url);
+    hls.attachMedia(video);
+  } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+    video.src = stream.url;
+  }
+});
 </script>
