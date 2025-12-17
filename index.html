@@ -16,98 +16,147 @@
   </body>
 </html>
 <style>
-.site-footer {
-  background: linear-gradient(180deg, #0b0b0b, #000);
-  padding: 50px 20px 30px;
-  color: #fff;
-  border-top: 1px solid rgba(255,255,255,0.05);
+:root{
+  --neon:#6cf2ff;
+  --pink:#ff4fd8;
+  --bg:#03060a;
 }
 
-.site-footer h2 {
-  text-align: center;
-  font-size: 26px;
-  font-weight: 600;
-  letter-spacing: 0.4em;
-  margin-bottom: 30px;
+/* ===== FOOTER BASE ===== */
+.site-footer{
+  position:relative;
+  background:
+    radial-gradient(1200px 400px at 50% -10%, rgba(108,242,255,.15), transparent),
+    linear-gradient(180deg,#05090f,#000);
+  padding:60px 20px 40px;
+  color:#e9f7ff;
+  overflow:hidden;
+  border-top:1px solid rgba(108,242,255,.2);
 }
 
-/* VERTICAL SCROLL AREA */
-.footer-videos {
-  max-width: 420px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
-  max-height: 420px;
-  overflow-y: auto;
-  padding-right: 6px;
+/* animated grid */
+.site-footer::before{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    linear-gradient(rgba(108,242,255,.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(108,242,255,.06) 1px, transparent 1px);
+  background-size:40px 40px;
+  animation:gridMove 40s linear infinite;
+  pointer-events:none;
+}
+@keyframes gridMove{to{background-position:0 40px,40px 0}}
+
+.site-footer h2{
+  text-align:center;
+  font-size:28px;
+  letter-spacing:.6em;
+  margin-bottom:34px;
+  text-shadow:0 0 18px rgba(108,242,255,.6);
 }
 
-/* SCROLLBAR */
-.footer-videos::-webkit-scrollbar {
-  width: 4px;
-}
-.footer-videos::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.2);
-  border-radius: 10px;
-}
-
-/* VIDEO CARD */
-.footer-video {
-  position: relative;
-  background: rgba(255,255,255,0.04);
-  border-radius: 18px;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.06);
-  backdrop-filter: blur(12px);
-  transition: transform .3s ease;
+/* ===== SCROLL CORE ===== */
+.footer-videos{
+  max-width:420px;
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  gap:28px;
+  max-height:460px;
+  overflow-y:auto;
+  scroll-snap-type:y mandatory;
+  padding-right:6px;
 }
 
-.footer-video:hover {
-  transform: scale(1.02);
+/* scrollbar */
+.footer-videos::-webkit-scrollbar{width:4px}
+.footer-videos::-webkit-scrollbar-thumb{
+  background:linear-gradient(var(--neon),var(--pink));
+  border-radius:10px;
 }
 
-/* LIVE BADGE */
-.live-badge {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  background: #e50914;
-  color: #fff;
-  font-size: 11px;
-  font-weight: 600;
-  padding: 4px 10px;
-  border-radius: 20px;
-  letter-spacing: 0.12em;
-  z-index: 10;
-  box-shadow: 0 0 12px rgba(229,9,20,0.6);
+/* ===== CARD ===== */
+.footer-video{
+  position:relative;
+  scroll-snap-align:start;
+  border-radius:22px;
+  overflow:hidden;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+  backdrop-filter: blur(14px);
+  border:1px solid rgba(108,242,255,.35);
+  box-shadow:
+    0 0 0 1px rgba(108,242,255,.15),
+    0 25px 60px rgba(0,0,0,.6);
+  transition:transform .5s ease, box-shadow .5s ease;
 }
 
-/* VIDEO */
-.footer-video iframe {
-  width: 100%;
-  height: 420px;
-  border: none;
-  background: #000;
+.footer-video:hover{
+  transform:translateY(-8px) scale(1.03);
+  box-shadow:
+    0 0 35px rgba(108,242,255,.45),
+    0 40px 90px rgba(0,0,0,.8);
 }
 
-/* TITLE */
-.footer-video p {
-  padding: 12px;
-  text-align: center;
-  font-size: 13px;
-  color: #ccc;
-  letter-spacing: 0.08em;
+/* holographic edge */
+.footer-video::after{
+  content:"";
+  position:absolute; inset:0;
+  background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.35),transparent 70%);
+  transform:translateX(-120%);
+  animation:holo 6s infinite;
+}
+@keyframes holo{
+  0%,60%{transform:translateX(-120%)}
+  100%{transform:translateX(120%)}
 }
 
-/* COPYRIGHT */
-.footer-copy {
-  display: block;
-  text-align: center;
-  margin-top: 35px;
-  font-size: 12px;
-  color: #777;
-  letter-spacing: 0.14em;
+/* ===== LIVE BADGE ===== */
+.live-badge{
+  position:absolute;
+  top:14px; left:14px;
+  padding:6px 14px;
+  font-size:11px;
+  letter-spacing:.2em;
+  border-radius:999px;
+  background:linear-gradient(90deg,#ff0033,#ff7a00);
+  box-shadow:0 0 18px rgba(255,0,51,.8);
+  animation:livePulse 1.4s infinite;
+  z-index:10;
+}
+@keyframes livePulse{
+  0%{box-shadow:0 0 8px rgba(255,0,51,.6)}
+  50%{box-shadow:0 0 26px rgba(255,0,51,1)}
+  100%{box-shadow:0 0 8px rgba(255,0,51,.6)}
+}
+
+/* ===== VIDEO ===== */
+.footer-video iframe{
+  width:100%;
+  height:420px;
+  border:none;
+  background:#000;
+}
+
+/* ===== TITLE ===== */
+.footer-video p{
+  text-align:center;
+  padding:14px;
+  font-size:13px;
+  letter-spacing:.14em;
+  color:#dff7ff;
+  text-shadow:0 0 10px rgba(108,242,255,.6);
+}
+
+/* ===== COPYRIGHT ===== */
+.footer-copy{
+  display:block;
+  text-align:center;
+  margin-top:40px;
+  font-size:12px;
+  letter-spacing:.2em;
+  color:#7ccfff;
+  opacity:.7;
 }
 </style>
 
@@ -115,7 +164,6 @@
   <h2>ONLINE TV</h2>
 
   <div class="footer-videos">
-
     <div class="footer-video">
       <span class="live-badge">LIVE</span>
       <iframe
@@ -124,8 +172,7 @@
       </iframe>
       <p>ZO'R TV</p>
     </div>
-
   </div>
 
-  <span class="footer-copy">© 2025 ONLINE TV</span>
+  <span class="footer-copy">© 4000 · INTERSTELLAR BROADCAST</span>
 </footer>
