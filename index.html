@@ -15,164 +15,171 @@
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
+<!-- HLS PLAYER -->
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
 <style>
-:root{
-  --neon:#6cf2ff;
-  --pink:#ff4fd8;
-  --bg:#03060a;
+.site-footer {
+  background: #1c1c1c;
+  padding: 30px 15px 20px;
+  color: #fff;
 }
 
-/* ===== FOOTER BASE ===== */
-.site-footer{
-  position:relative;
-  background:
-    radial-gradient(1200px 400px at 50% -10%, rgba(108,242,255,.15), transparent),
-    linear-gradient(180deg,#05090f,#000);
-  padding:60px 20px 40px;
-  color:#e9f7ff;
-  overflow:hidden;
-  border-top:1px solid rgba(108,242,255,.2);
+/* TITLE */
+.site-footer h2 {
+  font-size: 22px;
+  margin-bottom: 15px;
 }
 
-/* animated grid */
-.site-footer::before{
-  content:"";
-  position:absolute; inset:0;
-  background:
-    linear-gradient(rgba(108,242,255,.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(108,242,255,.06) 1px, transparent 1px);
-  background-size:40px 40px;
-  animation:gridMove 40s linear infinite;
-  pointer-events:none;
-}
-@keyframes gridMove{to{background-position:0 40px,40px 0}}
-
-.site-footer h2{
-  text-align:center;
-  font-size:28px;
-  letter-spacing:.6em;
-  margin-bottom:34px;
-  text-shadow:0 0 18px rgba(108,242,255,.6);
+/* ================= EFIR ================= */
+.live-player {
+  position: relative;
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 20px;
 }
 
-/* ===== SCROLL CORE ===== */
-.footer-videos{
-  max-width:420px;
-  margin:0 auto;
-  display:flex;
-  flex-direction:column;
-  gap:28px;
-  max-height:460px;
-  overflow-y:auto;
-  scroll-snap-type:y mandatory;
-  padding-right:6px;
+.live-player video {
+  width: 100%;
+  height: 200px;
+  background: #000;
 }
 
-/* scrollbar */
-.footer-videos::-webkit-scrollbar{width:4px}
-.footer-videos::-webkit-scrollbar-thumb{
-  background:linear-gradient(var(--neon),var(--pink));
-  border-radius:10px;
+.live-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #00c853;
+  color: #000;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
 }
 
-/* ===== CARD ===== */
-.footer-video{
-  position:relative;
-  scroll-snap-align:start;
-  border-radius:22px;
-  overflow:hidden;
-  background:
-    linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
-  backdrop-filter: blur(14px);
-  border:1px solid rgba(108,242,255,.35);
-  box-shadow:
-    0 0 0 1px rgba(108,242,255,.15),
-    0 25px 60px rgba(0,0,0,.6);
-  transition:transform .5s ease, box-shadow .5s ease;
+/* ================= CHANNELS ================= */
+.channels-scroll {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(2, 1fr);
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  scroll-snap-type: x mandatory;
 }
 
-.footer-video:hover{
-  transform:translateY(-8px) scale(1.03);
-  box-shadow:
-    0 0 35px rgba(108,242,255,.45),
-    0 40px 90px rgba(0,0,0,.8);
+.channels-scroll::-webkit-scrollbar {
+  height: 4px;
+}
+.channels-scroll::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 10px;
 }
 
-/* holographic edge */
-.footer-video::after{
-  content:"";
-  position:absolute; inset:0;
-  background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.35),transparent 70%);
-  transform:translateX(-120%);
-  animation:holo 6s infinite;
-}
-@keyframes holo{
-  0%,60%{transform:translateX(-120%)}
-  100%{transform:translateX(120%)}
+/* CHANNEL CARD */
+.channel-card {
+  width: 160px;
+  background: #2a2a2a;
+  border-radius: 10px;
+  padding: 10px;
+  position: relative;
+  scroll-snap-align: start;
 }
 
-/* ===== LIVE BADGE ===== */
-.live-badge{
-  position:absolute;
-  top:14px; left:14px;
-  padding:6px 14px;
-  font-size:11px;
-  letter-spacing:.2em;
-  border-radius:999px;
-  background:linear-gradient(90deg,#ff0033,#ff7a00);
-  box-shadow:0 0 18px rgba(255,0,51,.8);
-  animation:livePulse 1.4s infinite;
-  z-index:10;
-}
-@keyframes livePulse{
-  0%{box-shadow:0 0 8px rgba(255,0,51,.6)}
-  50%{box-shadow:0 0 26px rgba(255,0,51,1)}
-  100%{box-shadow:0 0 8px rgba(255,0,51,.6)}
+.channel-card img {
+  width: 100%;
+  height: 80px;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 6px;
 }
 
-/* ===== VIDEO ===== */
-.footer-video iframe{
-  width:100%;
-  height:420px;
-  border:none;
-  background:#000;
+.channel-card p {
+  margin-top: 8px;
+  font-size: 13px;
+  text-align: center;
+  color: #ddd;
 }
 
-/* ===== TITLE ===== */
-.footer-video p{
-  text-align:center;
-  padding:14px;
-  font-size:13px;
-  letter-spacing:.14em;
-  color:#dff7ff;
-  text-shadow:0 0 10px rgba(108,242,255,.6);
+/* BADGES */
+.badge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  font-size: 10px;
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-weight: 600;
 }
 
-/* ===== COPYRIGHT ===== */
-.footer-copy{
-  display:block;
-  text-align:center;
-  margin-top:40px;
-  font-size:12px;
-  letter-spacing:.2em;
-  color:#7ccfff;
-  opacity:.7;
+.badge.hd {
+  background: #2979ff;
+  color: #fff;
+}
+
+.footer-copy {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 12px;
+  color: #777;
 }
 </style>
 
 <footer class="site-footer">
-  <h2>ONLINE TV</h2>
 
-  <div class="footer-videos">
-    <div class="footer-video">
-      <span class="live-badge">LIVE</span>
-      <iframe
-        src="https://stream8.cinerama.uz/1016/tracks-v1a1/mono.m3u8"
-        allowfullscreen>
-      </iframe>
-      <p>ZO'R TV</p>
-    </div>
+  <h2>ONLAYN EFIR</h2>
+
+  <!-- ===== LIVE EFIR PLAYER ===== -->
+  <div class="live-player">
+    <span class="live-badge">LIVE</span>
+    <video id="liveVideo" controls autoplay muted></video>
   </div>
 
-  <span class="footer-copy">© 4000 · INTERSTELLAR BROADCAST</span>
+  <h2>ONLAYN TV</h2>
+
+  <!-- ===== CHANNEL LIST ===== -->
+  <div class="channels-scroll">
+
+    <div class="channel-card">
+      <span class="badge hd">HD</span>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/O%27zbekiston_24_logo.png/512px-O%27zbekiston_24_logo.png">
+      <p>O'zbekiston 24</p>
+    </div>
+
+    <div class="channel-card">
+      <span class="badge hd">HD</span>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Uzreport_TV_logo.png">
+      <p>UzReport TV</p>
+    </div>
+
+    <div class="channel-card">
+      <span class="badge hd">HD</span>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Zo%27r_TV_logo.png">
+      <p>ZO'R TV</p>
+    </div>
+
+    <div class="channel-card">
+      <span class="badge hd">HD</span>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/2/25/Channel_One_Russia_logo.png">
+      <p>Первый канал</p>
+    </div>
+
+  </div>
+
+  <span class="footer-copy">© 2025 ONLINE TV</span>
 </footer>
+
+<script>
+const video = document.getElementById('liveVideo');
+const streamUrl = 'https://stream8.cinerama.uz/1016/tracks-v1a1/mono.m3u8';
+
+if (Hls.isSupported()) {
+  const hls = new Hls();
+  hls.loadSource(streamUrl);
+  hls.attachMedia(video);
+} else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+  video.src = streamUrl;
+}
+</script>
