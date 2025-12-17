@@ -16,141 +16,71 @@
   </body>
 </html>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap');
-
-:root {
-  --neon: #00f7ff;
-  --pink: #ff2cdf;
-  --bg-dark: #05070a;
-}
-
 .site-footer {
-  background:
-    radial-gradient(circle at top, rgba(0,247,255,.12), transparent 60%),
-    linear-gradient(180deg, #030407, #000);
-  padding: 70px 20px 40px;
+  background: linear-gradient(180deg, #0b0b0b, #000);
+  padding: 50px 20px 30px;
   color: #fff;
-  font-family: 'Orbitron', sans-serif;
-  border-top: 1px solid rgba(255,255,255,.06);
-  position: relative;
-  overflow: hidden;
-}
-
-/* GLOW GRID */
-.site-footer::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    repeating-linear-gradient(
-      0deg,
-      rgba(255,255,255,.03) 0,
-      rgba(255,255,255,.03) 1px,
-      transparent 1px,
-      transparent 6px
-    );
-  opacity: .15;
-  pointer-events: none;
+  border-top: 1px solid rgba(255,255,255,0.05);
 }
 
 .site-footer h2 {
   text-align: center;
-  font-size: 30px;
-  letter-spacing: .6em;
-  margin-bottom: 40px;
-  color: var(--neon);
-  text-shadow:
-    0 0 20px rgba(0,247,255,.6),
-    0 0 40px rgba(0,247,255,.3);
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: 0.4em;
+  margin-bottom: 30px;
 }
 
-/* MAIN SCROLL */
+/* VERTICAL SCROLL AREA */
 .footer-videos {
-  max-width: 440px;
+  max-width: 420px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 26px;
-  max-height: 520px;
+  gap: 22px;
+  max-height: 420px;
   overflow-y: auto;
   padding-right: 6px;
-  scroll-behavior: smooth;
 }
 
 /* SCROLLBAR */
 .footer-videos::-webkit-scrollbar {
-  width: 5px;
+  width: 4px;
 }
 .footer-videos::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--neon), var(--pink));
+  background: rgba(255,255,255,0.2);
   border-radius: 10px;
 }
 
 /* VIDEO CARD */
 .footer-video {
   position: relative;
-  border-radius: 22px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 18px;
   overflow: hidden;
-  background:
-    linear-gradient(135deg,
-      rgba(255,255,255,.12),
-      rgba(255,255,255,.02)
-    );
-  backdrop-filter: blur(18px);
-  border: 1px solid rgba(255,255,255,.12);
-  box-shadow:
-    0 0 25px rgba(0,247,255,.18),
-    inset 0 0 40px rgba(255,255,255,.03);
-  transition: all .4s ease;
-}
-
-/* HOLOGRAM EFFECT */
-.footer-video::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    120deg,
-    transparent 30%,
-    rgba(255,255,255,.25),
-    transparent 70%
-  );
-  opacity: 0;
-  transition: .4s;
+  border: 1px solid rgba(255,255,255,0.06);
+  backdrop-filter: blur(12px);
+  transition: transform .3s ease;
 }
 
 .footer-video:hover {
-  transform: scale(1.04) translateY(-4px);
-  box-shadow:
-    0 0 40px rgba(0,247,255,.6),
-    0 0 80px rgba(255,44,223,.25);
-}
-
-.footer-video:hover::after {
-  opacity: .6;
+  transform: scale(1.02);
 }
 
 /* LIVE BADGE */
 .live-badge {
   position: absolute;
-  top: 14px;
-  left: 14px;
-  padding: 5px 14px;
+  top: 12px;
+  left: 12px;
+  background: #e50914;
+  color: #fff;
   font-size: 11px;
-  letter-spacing: .2em;
-  border-radius: 30px;
-  background: linear-gradient(90deg, #ff003c, #ff5f5f);
-  box-shadow:
-    0 0 12px #ff003c,
-    0 0 30px rgba(255,0,60,.8);
-  animation: pulse 1.5s infinite;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.12em;
   z-index: 10;
-}
-
-@keyframes pulse {
-  0% { box-shadow: 0 0 10px #ff003c; }
-  50% { box-shadow: 0 0 30px #ff003c; }
-  100% { box-shadow: 0 0 10px #ff003c; }
+  box-shadow: 0 0 12px rgba(229,9,20,0.6);
 }
 
 /* VIDEO */
@@ -163,23 +93,21 @@
 
 /* TITLE */
 .footer-video p {
-  padding: 14px;
+  padding: 12px;
   text-align: center;
   font-size: 13px;
-  letter-spacing: .18em;
-  color: #dffcff;
-  text-shadow: 0 0 8px rgba(0,247,255,.6);
+  color: #ccc;
+  letter-spacing: 0.08em;
 }
 
 /* COPYRIGHT */
 .footer-copy {
   display: block;
   text-align: center;
-  margin-top: 45px;
-  font-size: 11px;
-  letter-spacing: .3em;
-  color: #6efcff;
-  opacity: .6;
+  margin-top: 35px;
+  font-size: 12px;
+  color: #777;
+  letter-spacing: 0.14em;
 }
 </style>
 
@@ -190,29 +118,14 @@
 
     <div class="footer-video">
       <span class="live-badge">LIVE</span>
-      <iframe src="https://stream8.cinerama.uz/1016/tracks-v1a1/mono.m3u8"></iframe>
+      <iframe
+        src="https://stream8.cinerama.uz/1016/tracks-v1a1/mono.m3u8"
+        allowfullscreen>
+      </iframe>
       <p>ZO'R TV</p>
-    </div>
-
-    <div class="footer-video">
-      <span class="live-badge">LIVE</span>
-      <iframe src="https://stream8.cinerama.uz/1017/tracks-v1a1/playlist.m3u8"></iframe>
-      <p>SEVIMLI TV</p>
-    </div>
-
-    <div class="footer-video">
-      <span class="live-badge">LIVE</span>
-      <iframe src="https://stream8.cinerama.uz/1018/playlist.m3u8"></iframe>
-      <p>F TV</p>
-    </div>
-
-    <div class="footer-video">
-      <span class="live-badge">LIVE</span>
-      <iframe src="http://gohoski.fvds.ru:3000/mediabay/645/playlist.m3u8"></iframe>
-      <p>AQLVOY TV</p>
     </div>
 
   </div>
 
-  <span class="footer-copy">© 2025 NETLIVY® FUTURE MEDIA</span>
+  <span class="footer-copy">© 2025 ONLINE TV</span>
 </footer>
